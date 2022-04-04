@@ -22,7 +22,8 @@ export class MapComponent implements AfterViewInit {
     private image: any;
     private LightIcon: any;
     private defaultHmRadius = 50;
-    private defaultHmBlur = 50;
+    private defaultHmBlur = 40;
+    private amount: any;
     private gradient = {0.4: 'blue', 0.55: 'lime', 0.80: 'yellow', 1: 'red'}
   
     private initMap(): void {
@@ -37,15 +38,12 @@ export class MapComponent implements AfterViewInit {
     });
       this.LightIcon = new this.LightIcon ({iconUrl: 'assets/light.jpg'});
       this.map.fitBounds(this.bounds);
+      this.amount = 8000;
       this.myPoints = [
-        [400, 900, 8000 ]
+        [400, 900, this.amount ]
 
     ]
     this.options = {
-      
-      layers: [
-      this.image
-      ],
       radius: this.defaultHmRadius, blur: this.defaultHmBlur, gradient: this.gradient,
       zoom: 12,
       center: L.latLng(this.myPoints),
@@ -56,7 +54,6 @@ export class MapComponent implements AfterViewInit {
 
   
       ////Adding heat layer to a map
-  
   
     this.heat = L.heatLayer(this.myPoints, this.options ).addTo(this.map);}
   
